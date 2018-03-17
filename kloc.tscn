@@ -32,9 +32,16 @@ angular_damp = -1.0
 
 position = Vector2( 0, -1 )
 texture = ExtResource( 1 )
+_sections_unfolded = [ "Animation", "Material", "Offset", "Pause", "Region", "Transform", "Visibility" ]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
 shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 

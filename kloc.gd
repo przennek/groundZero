@@ -15,13 +15,18 @@ func _ready():
 
 func _physics_process(delta):
 	var which = get_name()
+	var screensize = get_viewport_rect().size
 	# move up and down based on input
 	if Input.is_action_pressed(which+"_move_up") and position.y > 0:
 		apply_impulse( Vector2(0,0),  Vector2( 0, -MOVE_SPEED * delta)) 
-	if Input.is_action_pressed(which+"_move_down") and position.y < get_viewport_rect().size.y:
+#		position.y = clamp(position.y, 0, screensize.y)
+	if Input.is_action_pressed(which+"_move_down") and position.y < screensize.y:
 		apply_impulse( Vector2(0,0),  Vector2( 0, MOVE_SPEED * delta)) 
+#		position.y = clamp(position.y, 0, screensize.y)
 	if Input.is_action_pressed(which+"_move_left") and position.x > 0:
-		apply_impulse( Vector2(0,0),  Vector2( -MOVE_SPEED * delta, 0)) 
-	if Input.is_action_pressed(which+"_move_right") and position.x < get_viewport_rect().size.x:
+		apply_impulse( Vector2(0,0),  Vector2( -MOVE_SPEED * delta, 0))
+#		position.x = clamp(position.x, 0, screensize.x) 
+	if Input.is_action_pressed(which+"_move_right") and position.x < screensize.x:
 		apply_impulse( Vector2(0,0),  Vector2( MOVE_SPEED * delta, 0)) 
+#		position.x = clamp(position.x, 0, screensize.x)
 	
