@@ -16,7 +16,7 @@ __meta__ = {
 
 position = Vector2( 313.573, 228.255 )
 friction = 0.0
-bounce = 1.0
+bounce = 0.6
 script = ExtResource( 2 )
 
 [node name="floor" parent="Node" index="1" instance=ExtResource( 3 )]
