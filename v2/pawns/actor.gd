@@ -2,21 +2,28 @@ extends "pawn.gd"
 
 onready var Grid = get_parent()
 
+var steady = false;
+
+func set_steady(new_steady):
+	steady = new_steady
+
 func _ready():
 	update_look_direction(Vector2(1, 0))
 
-
 func _process(delta):
 	var input_direction = get_input_direction()
+	var gravity = false
 	if not input_direction:
 		input_direction = Vector2(0, 1)
+		gravity = true
 	update_look_direction(input_direction)
 
-	var target_position = Grid.request_move(self, input_direction)
+	var target_position = Grid.request_move(self, input_direction, gravity)
 	if target_position:
 		move_to(target_position)
 	else:
-		bump()
+		if !steady:
+			bump()
 
 
 func get_input_direction():

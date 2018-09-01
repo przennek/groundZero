@@ -23,16 +23,16 @@ func _ready():
 	
 	generate_map()
 	
-	for child in get_children():
-		set_cellv(world_to_map(child.position), child.type)
+#	for child in get_children():
+#		set_cellv(world_to_map(child.position), child.type)
 	
 
 
 func generate_map(): 
 	for i in range(1, grid_size.x - 1):
-		for j in range(10, grid_size.y - 1):
-			var prob = gaussian(10, 10)
-			if prob < 19 && prob > 1:
+		for j in range(10, grid_size.y):
+			var prob = gaussian(100, 100)
+			if prob < 250 && prob > -50:
 				set_cell(i, j, OBJECT)
 
 
@@ -53,13 +53,13 @@ func gaussian(mean, deviation):
 	w = sqrt(-2 * log(w)/w)
 	return floor(mean + deviation * x1 * w)
 
-func get_cell_pawn(coordinates):
-	for node in get_children():
-		if world_to_map(node.position) == coordinates:
-			return(node)
+#func get_cell_pawn(coordinates):
+#	for node in get_children():
+#		if world_to_map(node.position) == coordinates:
+#			return(node)
 
 
-func request_move(pawn, direction):
+func request_move(pawn, direction, gravity):
 	var cell_start = world_to_map(pawn.position)
 	var cell_target = cell_start + direction
 	
@@ -68,13 +68,26 @@ func request_move(pawn, direction):
 		EMPTY:
 			return update_pawn_position(pawn, cell_start, cell_target)
 		OBJECT:
-			var object_pawn = get_cell_pawn(cell_target)
-			object_pawn.queue_free()
-			return update_pawn_position(pawn, cell_start, cell_target)
+			if !gravity && direction.y != -1:
+				pawn.set_steady(false)
+				
+				wait(10)
+				
+				set_cell(cell_target.x, cell_target.y, EMPTY)
+				return update_pawn_position(pawn, cell_start, cell_target)
+			else:
+				pawn.set_steady(true)
 		ACTOR:
 			var pawn_name = get_cell_pawn(cell_target).name
 			print("Cell %s contains %s" % [cell_target, pawn_name])
 
+func wait(wait_time):
+	var t = Timer.new()
+	t.set_wait_time(wait_time)
+	t.set_one_shot(true)
+	self.add_child(t)
+	t.start()
+	yield(t, "timeout")
 
 func update_pawn_position(pawn, cell_start, cell_target):
 	set_cellv(cell_target, pawn.type)
