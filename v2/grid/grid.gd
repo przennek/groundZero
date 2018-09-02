@@ -23,9 +23,6 @@ func _ready():
 	
 	generate_map()
 	
-#	for child in get_children():
-#		set_cellv(world_to_map(child.position), child.type)
-	
 
 
 func generate_map(): 
@@ -53,12 +50,6 @@ func gaussian(mean, deviation):
 	w = sqrt(-2 * log(w)/w)
 	return floor(mean + deviation * x1 * w)
 
-#func get_cell_pawn(coordinates):
-#	for node in get_children():
-#		if world_to_map(node.position) == coordinates:
-#			return(node)
-
-
 func request_move(pawn, direction, gravity):
 	var cell_start = world_to_map(pawn.position)
 	var cell_target = cell_start + direction
@@ -71,23 +62,9 @@ func request_move(pawn, direction, gravity):
 			if !gravity && direction.y != -1:
 				pawn.set_steady(false)
 				
-#				wait(1000)
-#				pawn.bump()
-#				set_cell(cell_target.x, cell_target.y, EMPTY)
 				return [cell_start, cell_target, cell_target_type]
 			else:
 				pawn.set_steady(true)
-#		ACTOR:
-#			var pawn_name = get_cell_pawn(cell_target).name
-#			print("Cell %s contains %s" % [cell_target, pawn_name])
-
-#func wait(wait_time):
-#	var t = Timer.new()
-#	t.set_wait_time(wait_time)
-#	t.set_one_shot(true)
-#	self.add_child(t)
-#	t.start()
-#	yield(t, "timeout")
 
 func update_pawn_position(pawn, cell_start, cell_target):
 	set_cellv(cell_target, pawn.type)

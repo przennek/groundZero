@@ -18,7 +18,6 @@ func _process(delta):
 		gravity = true
 	update_look_direction(input_direction)
 
-#	Grid.request_move(self, input_direction, gravity)
 	var request_move_result = Grid.request_move(self, input_direction, gravity);
 	if !request_move_result:
 		return
@@ -30,9 +29,6 @@ func _process(delta):
 	else:
 		var target_position = Grid.update_pawn_position(self, cell_start, cell_target)
 		move_to(target_position)
-#	else:
-#		bump()
-
 
 func get_input_direction():
 	return Vector2(
