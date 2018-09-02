@@ -18,12 +18,20 @@ func _process(delta):
 		gravity = true
 	update_look_direction(input_direction)
 
-	var target_position = Grid.request_move(self, input_direction, gravity)
-	if target_position:
-		move_to(target_position)
+#	Grid.request_move(self, input_direction, gravity)
+	var request_move_result = Grid.request_move(self, input_direction, gravity);
+	if !request_move_result:
+		return
+	var cell_start = request_move_result[0]
+	var cell_target = request_move_result[1]
+	var target_cell_type = request_move_result[2]
+	if target_cell_type == CELL_TYPES.OBJECT:
+		bump(cell_start, cell_target, 4)
 	else:
-		if !steady:
-			bump()
+		var target_position = Grid.update_pawn_position(self, cell_start, cell_target)
+		move_to(target_position)
+#	else:
+#		bump()
 
 
 func get_input_direction():
@@ -46,7 +54,7 @@ func move_to(target_position):
 	var move_direction = (target_position - position).normalized()
 	$Tween.interpolate_property($Pivot, "position", - move_direction * 32, Vector2(), $AnimationPlayer.current_animation_length, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	position = target_position
-
+	
 	$Tween.start()
 
 	# Stop the function execution until the animation finished
@@ -55,8 +63,12 @@ func move_to(target_position):
 	set_process(true)
 
 
-func bump():
+func bump(cell_start, cell_target, times):
 	set_process(false)
-	$AnimationPlayer.play("bump")
-	yield($AnimationPlayer, "animation_finished")
+	for i in times:
+		$AnimationPlayer.play("bump")
+		yield( $AnimationPlayer, "animation_finished" )
 	set_process(true)
+	var target_position = Grid.update_pawn_position(self, cell_start, cell_target)
+	move_to(target_position)
+

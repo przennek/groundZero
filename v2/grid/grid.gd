@@ -66,28 +66,28 @@ func request_move(pawn, direction, gravity):
 	var cell_target_type = get_cellv(cell_target)
 	match cell_target_type:
 		EMPTY:
-			return update_pawn_position(pawn, cell_start, cell_target)
+				return [cell_start, cell_target, cell_target_type]
 		OBJECT:
 			if !gravity && direction.y != -1:
 				pawn.set_steady(false)
 				
-				wait(10)
-				
-				set_cell(cell_target.x, cell_target.y, EMPTY)
-				return update_pawn_position(pawn, cell_start, cell_target)
+#				wait(1000)
+#				pawn.bump()
+#				set_cell(cell_target.x, cell_target.y, EMPTY)
+				return [cell_start, cell_target, cell_target_type]
 			else:
 				pawn.set_steady(true)
-		ACTOR:
-			var pawn_name = get_cell_pawn(cell_target).name
-			print("Cell %s contains %s" % [cell_target, pawn_name])
+#		ACTOR:
+#			var pawn_name = get_cell_pawn(cell_target).name
+#			print("Cell %s contains %s" % [cell_target, pawn_name])
 
-func wait(wait_time):
-	var t = Timer.new()
-	t.set_wait_time(wait_time)
-	t.set_one_shot(true)
-	self.add_child(t)
-	t.start()
-	yield(t, "timeout")
+#func wait(wait_time):
+#	var t = Timer.new()
+#	t.set_wait_time(wait_time)
+#	t.set_one_shot(true)
+#	self.add_child(t)
+#	t.start()
+#	yield(t, "timeout")
 
 func update_pawn_position(pawn, cell_start, cell_target):
 	set_cellv(cell_target, pawn.type)

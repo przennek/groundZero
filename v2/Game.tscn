@@ -36,14 +36,11 @@ __meta__ = {
 [node name="Actor" parent="Grid" index="0" instance=ExtResource( 3 )]
 
 position = Vector2( 416, 288 )
-
-[node name="Pivot" parent="Grid/Actor" index="2"]
-
-editor/display_folded = true
+_sections_unfolded = [ "Material", "Offset", "Pause", "Transform", "Z Index" ]
 
 [node name="Sprite" parent="Grid/Actor/Pivot" index="0"]
 
-position = Vector2( 0, 0 )
+scale = Vector2( 0.917794, 1.13412 )
 
 [node name="Camera2D" type="Camera2D" parent="Grid/Actor" index="3"]
 
