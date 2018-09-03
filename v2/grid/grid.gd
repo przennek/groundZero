@@ -59,7 +59,11 @@ func request_move(pawn, direction, gravity):
 		EMPTY:
 				return [cell_start, cell_target, cell_target_type]
 		OBJECT:
-			if !gravity && direction.y != -1:
+
+			var under_cell_position = world_to_map(pawn.position)
+			under_cell_position.y = under_cell_position.y + 1
+			var under_cell_type = get_cellv(under_cell_position)
+			if !gravity && direction.y != -1 && under_cell_type != EMPTY:
 				pawn.set_steady(false)
 				
 				return [cell_start, cell_target, cell_target_type]
