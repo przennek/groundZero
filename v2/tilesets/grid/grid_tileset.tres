@@ -33,5 +33,5 @@
 2/occluder_offset = Vector2( 32, 32 )
 2/navigation_offset = Vector2( 32, 32 )
 2/shapes = [  ]
-_sections_unfolded = [ "0", "1" ]
+_sections_unfolded = [ "Resource" ]
 

@@ -24,8 +24,18 @@ func _process(delta):
 	var cell_start = request_move_result[0]
 	var cell_target = request_move_result[1]
 	var target_cell_type = request_move_result[2]
+	
+	# @Kamil zrefaktorujemy to kiedyś
 	if target_cell_type == CELL_TYPES.OBJECT:
 		bump(cell_start, cell_target, 4)
+	elif target_cell_type == CELL_TYPES.GOLD:
+		bump(cell_start, cell_target, 8)
+	elif target_cell_type == CELL_TYPES.DIAMOND:
+		bump(cell_start, cell_target, 12)
+	elif target_cell_type == CELL_TYPES.METEORITE:
+		bump(cell_start, cell_target, 16)
+	elif target_cell_type == CELL_TYPES.URANIUM:
+		bump(cell_start, cell_target, 16)
 	else:
 		var target_position = Grid.update_pawn_position(self, cell_start, cell_target)
 		move_to(target_position)
