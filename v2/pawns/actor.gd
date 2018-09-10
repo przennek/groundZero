@@ -3,13 +3,23 @@ extends "pawn.gd"
 onready var Grid = get_parent()
 
 var steady = false;
+var started = false;
 
 func set_steady(new_steady):
 	steady = new_steady
 
 func _ready():
 	update_look_direction(Vector2(1, 0))
-
+	set_process(false)
+	set_visible(false)
+	
+func _input(event):
+	if event is InputEventKey and not started:
+		if event.pressed:
+			set_process(true)
+			set_visible(true)
+			started = true
+			
 func _process(delta):
 	var input_direction = get_input_direction()
 	var gravity = false

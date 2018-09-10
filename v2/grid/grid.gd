@@ -22,6 +22,7 @@ func _ready():
 		set_cell(i, grid_size.y, BEDROCK)
 	
 	generate_map()
+			
 
 
 func generate_map(): 
