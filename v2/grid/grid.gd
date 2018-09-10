@@ -87,6 +87,8 @@ func request_move(pawn, direction, gravity):
 	var cell_target_type = get_cellv(cell_target)
 	
 	match cell_target_type:
+		EMPTY:
+			return [cell_start, cell_target, cell_target_type]
 		DIAMOND, OBJECT, GOLD, METEORITE, URANIUM:
 			var under_cell_position = world_to_map(pawn.position)
 			under_cell_position.y = under_cell_position.y + 1
