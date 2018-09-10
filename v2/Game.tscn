@@ -2,9 +2,9 @@
 
 [ext_resource path="res://new_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://grid/grid.gd" type="Script" id=2]
-[ext_resource path="res://pawns/Actor.tscn" type="PackedScene" id=3]
-[ext_resource path="res://MainMenu.tscn" type="PackedScene" id=4]
-[ext_resource path="res://MainMenu.gd" type="Script" id=5]
+[ext_resource path="res://MainMenu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://MainMenu.gd" type="Script" id=4]
+[ext_resource path="res://pawns/Actor.tscn" type="PackedScene" id=5]
 
 [node name="Game" type="Node" index="0"]
 
@@ -30,7 +30,15 @@ tile_data = PoolIntArray(  )
 script = ExtResource( 2 )
 _sections_unfolded = [ "Pause" ]
 
-[node name="Actor" parent="Grid" index="0" instance=ExtResource( 3 )]
+[node name="MarginContainer" parent="Grid" index="0" instance=ExtResource( 3 )]
+
+margin_left = -234.0
+margin_top = -64.0
+margin_right = 1145.0
+margin_bottom = 636.0
+script = ExtResource( 4 )
+
+[node name="Actor" parent="Grid" index="1" instance=ExtResource( 5 )]
 
 position = Vector2( 416, 288 )
 _sections_unfolded = [ "Offset", "Pause", "Transform", "Z Index" ]
@@ -67,14 +75,6 @@ drag_margin_bottom = 0.2
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
-
-[node name="MarginContainer" parent="Grid" index="1" instance=ExtResource( 4 )]
-
-margin_left = -234.0
-margin_top = -64.0
-margin_right = 1145.0
-margin_bottom = 636.0
-script = ExtResource( 5 )
 
 
 [editable path="Grid/Actor"]
