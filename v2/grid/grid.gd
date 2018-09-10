@@ -87,16 +87,15 @@ func request_move(pawn, direction, gravity):
 	var cell_target_type = get_cellv(cell_target)
 	
 	match cell_target_type:
-		EMPTY:
-			return [cell_start, cell_target, cell_target_type]
 		DIAMOND, OBJECT, GOLD, METEORITE, URANIUM:
-			if !gravity && direction.y != -1:
+			var under_cell_position = world_to_map(pawn.position)
+			under_cell_position.y = under_cell_position.y + 1
+			var under_cell_type = get_cellv(under_cell_position)
+			if !gravity && direction.y != -1 && under_cell_type != EMPTY:
 				pawn.set_steady(false)
 				return [cell_start, cell_target, cell_target_type]
 			else:
 				pawn.set_steady(true)
-
-
 
 func update_pawn_position(pawn, cell_start, cell_target):
 	set_cellv(cell_target, pawn.type)
