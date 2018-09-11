@@ -6,6 +6,7 @@ var tile_size = get_cell_size()
 var half_tile_size = tile_size / 2
 var grid_size = Vector2(30, 50)
 var blocks = []
+onready var fuel_bar = get_node('Actor/Camera2D/fuel_bar')
 
 
 func _ready():
@@ -22,6 +23,8 @@ func _ready():
 		set_cell(i, grid_size.y, BEDROCK)
 	
 	generate_map()
+	
+	fuel_bar.init(100, 100)
 	
 
 
@@ -71,6 +74,7 @@ func request_move(pawn, direction, gravity):
 				pawn.set_steady(true)
 
 func update_pawn_position(pawn, cell_start, cell_target):
+#	fuel_bar.set_value(50)
 	set_cellv(cell_target, pawn.type)
 	set_cellv(cell_start, EMPTY)
 	return map_to_world(cell_target) + cell_size / 2
