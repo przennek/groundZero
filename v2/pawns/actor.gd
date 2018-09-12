@@ -37,7 +37,7 @@ func _process(delta):
 	var cell_target = request_move_result[1]
 	var target_cell_type = request_move_result[2]
 	
-	if cell_target.y == 50 || get_parent().fuel_bar.current_value == 0:
+	if cell_target.y == 49 || get_parent().fuel_bar.current_value == 0:
 		get_tree().reload_current_scene()
 	
 	if target_cell_type == CELL_TYPES.OBJECT:
