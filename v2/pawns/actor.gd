@@ -74,12 +74,12 @@ func get_input_direction():
 
 func exchange_money():
 	var neededFuel = 100 - fuel_bar.current_value
-	var needed_money = neededFuel * 400
+	var needed_money = neededFuel * 300
 	if fuel_bar.money > needed_money:
 		fuel_bar.substract_money(needed_money)
 		fuel_bar.set_value(100)
 	else:
-		fuel_bar.add_value(float(fuel_bar.money) / 400)
+		fuel_bar.add_value(float(fuel_bar.money) / 300)
 		fuel_bar.set_money(0)		
 
 func update_look_direction(direction):
