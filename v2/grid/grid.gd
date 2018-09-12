@@ -1,6 +1,6 @@
 extends TileMap
 
-enum CELL_TYPES { EMPTY = -1, ACTOR, IG, DIAMOND, OBJECT, GOLD, METEORITE, URANIUM, BEDROCK}
+enum CELL_TYPES { EMPTY = -1, ACTOR, IG, DIAMOND, OBJECT, GOLD, METEORITE, URANIUM, BEDROCK, FUEL_STATION}
 
 var tile_size = get_cell_size()
 var half_tile_size = tile_size / 2
@@ -93,7 +93,7 @@ func request_move(pawn, direction, gravity):
 	match cell_target_type:
 		EMPTY:
 			return [cell_start, cell_target, cell_target_type]
-		DIAMOND, OBJECT, GOLD, METEORITE, URANIUM:
+		DIAMOND, OBJECT, GOLD, METEORITE, URANIUM, FUEL_STATION:
 			var under_cell_position = world_to_map(pawn.position)
 			under_cell_position.y = under_cell_position.y + 1
 			var under_cell_type = get_cellv(under_cell_position)
@@ -104,7 +104,10 @@ func request_move(pawn, direction, gravity):
 				pawn.set_steady(true)
 
 func update_pawn_position(pawn, cell_start, cell_target):
-#	fuel_bar.set_value(50)
-	set_cellv(cell_target, pawn.type)
-	set_cellv(cell_start, EMPTY)
+	var cell_target_type = get_cellv(cell_target)
+	var cell_start_type = get_cellv(cell_start)
+	if cell_target_type != FUEL_STATION:
+		set_cellv(cell_target, pawn.type)
+	if cell_start_type != FUEL_STATION:
+		set_cellv(cell_start, EMPTY)
 	return map_to_world(cell_target) + cell_size / 2

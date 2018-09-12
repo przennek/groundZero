@@ -5,6 +5,8 @@ onready var Grid = get_parent()
 var steady = false;
 var started = false;
 
+onready var fuel_bar = get_node("Camera2D/fuel_bar")
+
 func set_steady(new_steady):
 	steady = new_steady
 
@@ -38,17 +40,31 @@ func _process(delta):
 	# @Kamil zrefaktorujemy to kiedyś
 	if target_cell_type == CELL_TYPES.OBJECT:
 		bump(cell_start, cell_target, 4)
+		fuel_bar.substract_value(1)
+		fuel_bar.add_money(100)
 	elif target_cell_type == CELL_TYPES.GOLD:
 		bump(cell_start, cell_target, 8)
+		fuel_bar.substract_value(2)
+		fuel_bar.add_money(1000)
 	elif target_cell_type == CELL_TYPES.DIAMOND:
 		bump(cell_start, cell_target, 12)
+		fuel_bar.substract_value(3)
+		fuel_bar.add_money(5000)
 	elif target_cell_type == CELL_TYPES.METEORITE:
 		bump(cell_start, cell_target, 16)
+		fuel_bar.substract_value(4)
+		fuel_bar.add_money(10000)
 	elif target_cell_type == CELL_TYPES.URANIUM:
 		bump(cell_start, cell_target, 16)
+		fuel_bar.substract_value(4)
+		fuel_bar.add_money(10000)
+	elif target_cell_type == CELL_TYPES.FUEL_STATION:
+		exchange_money()
 	else:
 		var target_position = Grid.update_pawn_position(self, cell_start, cell_target)
 		move_to(target_position)
+		if(!gravity):
+			fuel_bar.substract_value(0.5)
 
 func get_input_direction():
 	return Vector2(
@@ -56,6 +72,15 @@ func get_input_direction():
 		int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
 	)
 
+func exchange_money():
+	var neededFuel = 100 - fuel_bar.current_value
+	var needed_money = neededFuel * 400
+	if fuel_bar.money > needed_money:
+		fuel_bar.substract_money(needed_money)
+		fuel_bar.set_value(100)
+	else:
+		fuel_bar.add_value(float(fuel_bar.money) / 400)
+		fuel_bar.set_money(0)		
 
 func update_look_direction(direction):
 	$Pivot/Sprite.rotation = direction.angle()

@@ -8,6 +8,7 @@
 [ext_resource path="res://tilesets/grid/meteorite.png" type="Texture" id=6]
 [ext_resource path="res://tilesets/grid/uranium.png" type="Texture" id=7]
 [ext_resource path="res://tilesets/grid/obstacle.png" type="Texture" id=8]
+[ext_resource path="res://tilesets/grid/fuel_station.png" type="Texture" id=9]
 
 [resource]
 
@@ -83,5 +84,14 @@
 7/occluder_offset = Vector2( 32, 32 )
 7/navigation_offset = Vector2( 32, 32 )
 7/shapes = [  ]
-_sections_unfolded = [ "7" ]
+8/name = "fuel_station"
+8/texture = ExtResource( 9 )
+8/tex_offset = Vector2( 0, 0 )
+8/modulate = Color( 1, 1, 1, 1 )
+8/region = Rect2( 0, 0, 64, 64 )
+8/is_autotile = false
+8/occluder_offset = Vector2( 32, 32 )
+8/navigation_offset = Vector2( 32, 32 )
+8/shapes = [  ]
+_sections_unfolded = [ "4" ]
 
