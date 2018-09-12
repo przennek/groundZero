@@ -3,13 +3,23 @@ extends "pawn.gd"
 onready var Grid = get_parent()
 
 var steady = false;
+var started = false;
 
 func set_steady(new_steady):
 	steady = new_steady
 
 func _ready():
 	update_look_direction(Vector2(1, 0))
-
+	set_process(false)
+	set_visible(false)
+	
+func _input(event):
+	if event is InputEventKey and not started:
+		if event.pressed:
+			set_process(true)
+			set_visible(true)
+			started = true
+			
 func _process(delta):
 	var input_direction = get_input_direction()
 	var gravity = false
@@ -24,8 +34,18 @@ func _process(delta):
 	var cell_start = request_move_result[0]
 	var cell_target = request_move_result[1]
 	var target_cell_type = request_move_result[2]
+	
+	# @Kamil zrefaktorujemy to kiedyś
 	if target_cell_type == CELL_TYPES.OBJECT:
 		bump(cell_start, cell_target, 4)
+	elif target_cell_type == CELL_TYPES.GOLD:
+		bump(cell_start, cell_target, 8)
+	elif target_cell_type == CELL_TYPES.DIAMOND:
+		bump(cell_start, cell_target, 12)
+	elif target_cell_type == CELL_TYPES.METEORITE:
+		bump(cell_start, cell_target, 16)
+	elif target_cell_type == CELL_TYPES.URANIUM:
+		bump(cell_start, cell_target, 16)
 	else:
 		var target_position = Grid.update_pawn_position(self, cell_start, cell_target)
 		move_to(target_position)
