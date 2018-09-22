@@ -5,7 +5,9 @@ onready var Grid = get_parent()
 var steady = false;
 var started = false;
 
+
 onready var fuel_bar = get_node("Camera2D/fuel_bar")
+onready var game_splash_screen = self.get_parent().get_child(0);
 
 func set_steady(new_steady):
 	steady = new_steady
@@ -16,7 +18,7 @@ func _ready():
 	set_visible(false)
 	
 func _input(event):
-	if event is InputEventKey and not started:
+	if event is InputEventKey and not started and event.get_scancode() == 16777221:
 		if event.pressed:
 			set_process(true)
 			set_visible(true)
@@ -37,33 +39,39 @@ func _process(delta):
 	var cell_target = request_move_result[1]
 	var target_cell_type = request_move_result[2]
 	
-	if cell_target.y == 49 || get_parent().fuel_bar.current_value == 0:
+	if cell_target.y == 49: # ENDING GAME IF
 		get_tree().reload_current_scene()
+		game_splash_screen.swap_screen_to_win()
 	
+	if get_parent().fuel_bar.current_value <= 0:
+		get_tree().reload_current_scene()
+		game_splash_screen.swap_screen_to_lose()
+
 	if target_cell_type == CELL_TYPES.OBJECT:
 		bump(cell_start, cell_target, 4)
-		fuel_bar.substract_value(1)
+		fuel_bar.substract_value(3)
 		fuel_bar.add_money(100)
 	elif target_cell_type == CELL_TYPES.GOLD:
 		bump(cell_start, cell_target, 8)
-		fuel_bar.substract_value(2)
+		fuel_bar.substract_value(6)
 		fuel_bar.add_money(1000)
 	elif target_cell_type == CELL_TYPES.DIAMOND:
 		bump(cell_start, cell_target, 12)
-		fuel_bar.substract_value(3)
+		fuel_bar.substract_value(6)
 		fuel_bar.add_money(5000)
 	elif target_cell_type == CELL_TYPES.METEORITE:
 		bump(cell_start, cell_target, 16)
-		fuel_bar.substract_value(4)
+		fuel_bar.substract_value(12)
 		fuel_bar.add_money(10000)
 	elif target_cell_type == CELL_TYPES.URANIUM:
 		bump(cell_start, cell_target, 16)
-		fuel_bar.substract_value(4)
+		fuel_bar.substract_value(12)
 		fuel_bar.add_money(10000)
 	elif target_cell_type == CELL_TYPES.FUEL_STATION:
 		exchange_money()
 	else:
 		var target_position = Grid.update_pawn_position(self, cell_start, cell_target)
+		
 		move_to(target_position)
 		if(!gravity):
 			fuel_bar.substract_value(0.5)

@@ -13,6 +13,10 @@ config_version=3
 config/name="Ground Zero"
 run/main_scene="res://Game.tscn"
 
+[autoload]
+
+globals="*res://globals.gd"
+
 [display]
 
 window/size/width=1280

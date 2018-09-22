@@ -27,17 +27,23 @@ collision_layer = 1
 collision_mask = 1
 occluder_light_mask = 1
 format = 1
-tile_data = PoolIntArray( 589828, 8, 0 )
+tile_data = PoolIntArray( 262144, 1, 0, 589828, 8, 0 )
 script = ExtResource( 2 )
 _sections_unfolded = [ "Pause" ]
 
 [node name="MarginContainer" parent="Grid" index="0" instance=ExtResource( 3 )]
 
-margin_left = -234.0
-margin_top = -64.0
-margin_right = 1145.0
-margin_bottom = 636.0
+margin_left = -233.0
+margin_top = -63.0
+margin_right = 1058.0
+margin_bottom = 638.0
 script = ExtResource( 4 )
+_sections_unfolded = [ "Hint", "Material", "Pause", "Visibility" ]
+
+[node name="TextureRect" parent="Grid/MarginContainer" index="0"]
+
+margin_right = 1291.0
+margin_bottom = 701.0
 
 [node name="Actor" parent="Grid" index="1" instance=ExtResource( 5 )]
 
@@ -50,7 +56,7 @@ editor/display_folded = true
 
 [node name="Sprite" parent="Grid/Actor/Pivot" index="0"]
 
-position = Vector2( 1.43051e-06, -1.90735e-06 )
+position = Vector2( 1.43051e-006, -1.90735e-006 )
 
 [node name="Camera2D" type="Camera2D" parent="Grid/Actor" index="3"]
 
@@ -84,4 +90,5 @@ scale = Vector2( 0.5, 0.5 )
 _sections_unfolded = [ "Transform" ]
 
 
+[editable path="Grid/MarginContainer"]
 [editable path="Grid/Actor"]

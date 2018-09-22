@@ -26,7 +26,7 @@ func _ready():
 	
 	fuel_bar.init(100, 100)
 	
-
+	
 
 func generate_map(): 
 	for i in range(1, grid_size.x):
