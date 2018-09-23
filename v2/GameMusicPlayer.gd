@@ -2,7 +2,7 @@ extends AudioStreamPlayer
 
 var start_music = load("res://music/start.ogg")
 var game_over_music = load("res://music/game_over.ogg")
-var win_music = load("res://music/start_music.ogg")
+var win_music = load("res://music/win.ogg")
 
 func _ready():
 	pass

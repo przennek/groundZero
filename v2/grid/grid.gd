@@ -33,7 +33,10 @@ func generate_map():
 		for j in range(50, grid_size.y):
 			var prob = gaussian(100, 100)
 			if prob < 250 && prob > -50:
-				set_cell(i, j, get_object_type(prob, j))
+				if(get_cell(i, j) == -1):
+					set_cell(i, j, get_object_type(prob, j))
+				else:
+					print("i:", i, ", j:", j)
 
 func get_object_type(probability, depth):
 	var prob = ((probability + 50) / 300.0) * 100

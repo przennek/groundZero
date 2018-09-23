@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://new_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://grid/grid.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://pawns/Actor.tscn" type="PackedScene" id=5]
 [ext_resource path="res://fuel_bar/fuel_bar.tscn" type="PackedScene" id=6]
 [ext_resource path="res://GameMusicPlayer.gd" type="Script" id=7]
+[ext_resource path="res://gas_station.png" type="Texture" id=8]
 
 [sub_resource type="Gradient" id=1]
 
@@ -44,7 +45,7 @@ collision_layer = 1
 collision_mask = 1
 occluder_light_mask = 1
 format = 1
-tile_data = PoolIntArray( 3211301, 8, 0 )
+tile_data = PoolIntArray( 3276832, 7, 0, 3276833, 7, 0, 3276834, 7, 0, 3276835, 7, 0, 3276836, 7, 0, 3276837, 7, 0, 3276838, 7, 0, 3276839, 7, 0, 3276840, 7, 0, 3276841, 7, 0, 3276842, 7, 0 )
 script = ExtResource( 2 )
 _sections_unfolded = [ "Pause" ]
 
@@ -55,11 +56,13 @@ margin_top = 2662.0
 margin_right = 3275.0
 margin_bottom = 3363.0
 script = ExtResource( 4 )
+_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Pause", "Rect", "Size Flags", "Visibility" ]
 
 [node name="TextureRect" parent="Grid/MarginContainer" index="0"]
 
 margin_right = 1291.0
 margin_bottom = 701.0
+_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Rect", "Size Flags", "Theme", "Visibility" ]
 
 [node name="Actor" parent="Grid" index="1" instance=ExtResource( 5 )]
 
@@ -108,7 +111,7 @@ _sections_unfolded = [ "Transform" ]
 [node name="GameMusicPlayer" type="AudioStreamPlayer" parent="." index="1"]
 
 stream = null
-volume_db = 0.2
+volume_db = 0.0
 pitch_scale = 1.0
 autoplay = true
 mix_target = 0
@@ -126,6 +129,13 @@ flip_h = true
 region_enabled = true
 region_rect = Rect2( 10, 10, 1920, 160 )
 _sections_unfolded = [ "Offset", "Region", "Transform", "Z Index" ]
+
+[node name="gas_station" type="Sprite" parent="." index="3"]
+
+position = Vector2( 1973.53, 3075.79 )
+z_index = -2
+texture = ExtResource( 8 )
+_sections_unfolded = [ "Z Index" ]
 
 
 [editable path="Grid/MarginContainer"]

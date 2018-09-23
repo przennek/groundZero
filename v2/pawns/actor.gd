@@ -62,11 +62,12 @@ func _process(delta):
 		bump(cell_start, cell_target, 16)
 		fuel_bar.add_money(12000)
 		fuel_to_be_substracted = 12
-	elif target_cell_type == CELL_TYPES.FUEL_STATION:
+	elif cell_target.y > 46 &&  cell_target.y < 50 && cell_target.x> 31 && cell_target.x < 43:
+		var target_position = Grid.update_pawn_position(self, cell_start, cell_target)
+		move_to(target_position)
 		exchange_money()
 	else:
 		var target_position = Grid.update_pawn_position(self, cell_start, cell_target)
-		
 		move_to(target_position)
 		if(!gravity):
 			fuel_bar.substract_value(0.1)
