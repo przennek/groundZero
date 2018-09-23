@@ -4,7 +4,7 @@ enum CELL_TYPES { EMPTY = -1, ACTOR, IG, DIAMOND, OBJECT, GOLD, METEORITE, URANI
 
 var tile_size = get_cell_size()
 var half_tile_size = tile_size / 2
-var grid_size = Vector2(30, 50)
+var grid_size = Vector2(150, 200)
 var blocks = []
 onready var fuel_bar = get_node('Actor/Camera2D/fuel_bar')
 
@@ -30,7 +30,7 @@ func _ready():
 
 func generate_map(): 
 	for i in range(1, grid_size.x):
-		for j in range(10, grid_size.y):
+		for j in range(50, grid_size.y):
 			var prob = gaussian(100, 100)
 			if prob < 250 && prob > -50:
 				set_cell(i, j, get_object_type(prob, j))

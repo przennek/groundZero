@@ -38,7 +38,7 @@ func _process(delta):
 	var cell_target = request_move_result[1]
 	var target_cell_type = request_move_result[2]
 	
-	if cell_target.y == 49: # ENDING GAME IF
+	if cell_target.y == 199: # ENDING GAME IF
 		get_tree().reload_current_scene()
 		game_splash_screen.swap_screen_to_win()
 
@@ -69,7 +69,7 @@ func _process(delta):
 		
 		move_to(target_position)
 		if(!gravity):
-			fuel_bar.substract_value(1)
+			fuel_bar.substract_value(0.1)
 	
 	fuel_bar.substract_value(fuel_to_be_substracted)
 	if get_parent().fuel_bar.current_value <= 0:

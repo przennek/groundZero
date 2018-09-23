@@ -58,5 +58,5 @@ func update():
 
 	fuel_bar.set_value(current_value)
 	
-	var percentage_text = str(percentage * 100) + "%"
+	var percentage_text = str(percentage * 1000)
 	fuel_text.set_text(percentage_text.pad_decimals(0))
