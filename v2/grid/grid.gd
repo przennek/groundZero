@@ -42,11 +42,11 @@ func get_object_type(probability, depth):
 func switch_object_type(starting_threshold, normalized_prob):
 	var offset = starting_threshold - 80
 	
-	var dirt_prec = recalc_probability(offset, 80, 0)
-	var gold_prec = recalc_probability(offset, 8, dirt_prec)
-	var diamond_prec = recalc_probability(offset, 4, gold_prec)
-	var meteo_prec = recalc_probability(offset, 3, diamond_prec)
-	var ur_prec = recalc_probability(offset, 2, meteo_prec)
+	var dirt_prec = recalc_probability(offset, 60, 0)
+	var gold_prec = recalc_probability(offset, 16, dirt_prec)
+	var diamond_prec = recalc_probability(offset, 9, gold_prec)
+	var meteo_prec = recalc_probability(offset, 7, diamond_prec)
+	var ur_prec = recalc_probability(offset, 5, meteo_prec)
 	var bed_prec = recalc_probability(offset, 3, ur_prec)
 	
 	if normalized_prob < dirt_prec:
@@ -74,7 +74,7 @@ func switch_object_type(starting_threshold, normalized_prob):
 			return METEORITE
 		else:
 			return URANIUM
-	elif normalized_prob < bed_prec - 60: # starting at 3% of bad luck
+	elif normalized_prob < bed_prec - 80: # starting at 3% of bad luck
 		return BEDROCK
 	else:
 		return OBJECT # hack  
