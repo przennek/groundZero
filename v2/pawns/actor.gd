@@ -49,7 +49,7 @@ func _process(delta):
 	elif target_cell_type == CELL_TYPES.GOLD:
 		bump(cell_start, cell_target, 8)
 		fuel_bar.add_money(3000)
-		fuel_to_be_substracted = 6
+		fuel_to_be_substracted = 4
 	elif target_cell_type == CELL_TYPES.DIAMOND:
 		bump(cell_start, cell_target, 12)
 		fuel_bar.add_money(8000)

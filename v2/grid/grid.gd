@@ -51,21 +51,36 @@ func switch_object_type(starting_threshold, normalized_prob):
 	
 	if normalized_prob < dirt_prec:
 		return OBJECT
-	elif normalized_prob < gold_prec: # starting at 8%
+	elif normalized_prob < gold_prec and normalized_prob > 120: # starting at 8%
 		return GOLD
-	elif normalized_prob < diamond_prec: # starting at 4%
-		return DIAMOND
-	elif normalized_prob < meteo_prec: # starting at 3%
-		return METEORITE
-	elif normalized_prob < ur_prec: # starting at 2%
-		return URANIUM
-	elif normalized_prob < bed_prec: # starting at 3% of bad luck
+	elif normalized_prob < diamond_prec and normalized_prob > 150: # starting at 4%
+		if normalized_prob % 3 == 0:
+			return GOLD
+		else:
+			return DIAMOND
+	elif normalized_prob < meteo_prec and normalized_prob > 190: # starting at 3%
+		if normalized_prob % 7 == 0:
+			return GOLD
+		elif normalized_prob % 7 == 1 or normalized_prob % 7 == 2:
+			return DIAMOND
+		else:
+			return METEORITE
+	elif normalized_prob < ur_prec and normalized_prob > 230: # starting at 2%
+		if normalized_prob % 9 == 0 or normalized_prob % 7 == 1:
+			return GOLD
+		elif normalized_prob % 7 == 2 or normalized_prob % 7 == 3:
+			return DIAMOND
+		elif normalized_prob % 7 == 4 or normalized_prob % 7 == 5:
+			return METEORITE
+		else:
+			return URANIUM
+	elif normalized_prob < bed_prec and normalized_prob % 5 == 0: # starting at 3% of bad luck
 		return BEDROCK
 	else:
 		return OBJECT # hack  
 
 func recalc_probability(offset, percentage, previous_value):
-	return previous_value - offset + percentage
+	return previous_value - offset + percentage - 40
 
 func gaussian(mean, deviation):
 	var x1 = null
