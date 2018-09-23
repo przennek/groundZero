@@ -5,7 +5,6 @@ onready var Grid = get_parent()
 var steady = false;
 var started = false;
 
-
 onready var fuel_bar = get_node("Camera2D/fuel_bar")
 onready var game_splash_screen = self.get_parent().get_child(0);
 
@@ -42,31 +41,27 @@ func _process(delta):
 	if cell_target.y == 49: # ENDING GAME IF
 		get_tree().reload_current_scene()
 		game_splash_screen.swap_screen_to_win()
-	
-	if get_parent().fuel_bar.current_value <= 0:
-		get_tree().reload_current_scene()
-		game_splash_screen.swap_screen_to_lose()
 
+	var fuel_to_be_substracted = 0;
 	if target_cell_type == CELL_TYPES.OBJECT:
 		bump(cell_start, cell_target, 4)
-		fuel_bar.substract_value(3)
-		fuel_bar.add_money(100)
+		fuel_to_be_substracted = 3
 	elif target_cell_type == CELL_TYPES.GOLD:
 		bump(cell_start, cell_target, 8)
-		fuel_bar.substract_value(6)
-		fuel_bar.add_money(1000)
+		fuel_bar.add_money(3000)
+		fuel_to_be_substracted = 6
 	elif target_cell_type == CELL_TYPES.DIAMOND:
 		bump(cell_start, cell_target, 12)
-		fuel_bar.substract_value(6)
-		fuel_bar.add_money(5000)
+		fuel_bar.add_money(8000)
+		fuel_to_be_substracted = 8
 	elif target_cell_type == CELL_TYPES.METEORITE:
 		bump(cell_start, cell_target, 16)
-		fuel_bar.substract_value(12)
-		fuel_bar.add_money(10000)
+		fuel_bar.add_money(12000)
+		fuel_to_be_substracted = 12
 	elif target_cell_type == CELL_TYPES.URANIUM:
 		bump(cell_start, cell_target, 16)
-		fuel_bar.substract_value(12)
-		fuel_bar.add_money(10000)
+		fuel_bar.add_money(12000)
+		fuel_to_be_substracted = 12
 	elif target_cell_type == CELL_TYPES.FUEL_STATION:
 		exchange_money()
 	else:
@@ -74,8 +69,13 @@ func _process(delta):
 		
 		move_to(target_position)
 		if(!gravity):
-			fuel_bar.substract_value(0.5)
-
+			fuel_bar.substract_value(1)
+	
+	fuel_bar.substract_value(fuel_to_be_substracted)
+	if get_parent().fuel_bar.current_value <= 0:
+		get_tree().reload_current_scene()
+		game_splash_screen.swap_screen_to_lose()
+	
 func get_input_direction():
 	return Vector2(
 		int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left")),

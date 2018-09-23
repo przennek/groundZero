@@ -38,7 +38,6 @@ margin_top = -63.0
 margin_right = 1058.0
 margin_bottom = 638.0
 script = ExtResource( 4 )
-_sections_unfolded = [ "Hint", "Material", "Pause", "Visibility" ]
 
 [node name="TextureRect" parent="Grid/MarginContainer" index="0"]
 
