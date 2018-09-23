@@ -60,7 +60,7 @@ editor/display_folded = true
 
 [node name="Sprite" parent="Grid/Actor/Pivot" index="0"]
 
-position = Vector2( 1.43051e-06, -1.90735e-06 )
+position = Vector2( 1.43051e-006, -1.90735e-006 )
 
 [node name="Camera2D" type="Camera2D" parent="Grid/Actor" index="3"]
 
