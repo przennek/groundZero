@@ -30,7 +30,7 @@ func set_value(value):
 	update()
 
 func substract_value(value):
-	current_value = current_value - value
+	#current_value = current_value - value
 	update()
 
 func add_value(value):
