@@ -35,8 +35,6 @@ func generate_map():
 			if prob < 250 && prob > -50:
 				if(get_cell(i, j) == -1):
 					set_cell(i, j, get_object_type(prob, j))
-				else:
-					print("i:", i, ", j:", j)
 
 func get_object_type(probability, depth):
 	var prob = ((probability + 50) / 300.0) * 100
