@@ -74,7 +74,7 @@ func switch_object_type(starting_threshold, normalized_prob):
 			return METEORITE
 		else:
 			return URANIUM
-	elif normalized_prob < bed_prec and normalized_prob % 5 == 0: # starting at 3% of bad luck
+	elif normalized_prob < bed_prec - 100: # starting at 3% of bad luck
 		return BEDROCK
 	else:
 		return OBJECT # hack  
