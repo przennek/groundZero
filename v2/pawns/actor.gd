@@ -6,6 +6,7 @@ var steady = false;
 var started = false;
 
 onready var fuel_bar = get_node("Camera2D/fuel_bar")
+onready var actor_sound_effect_player = get_node("PlayerSoundEffectsPlayer")
 onready var game_splash_screen = self.get_parent().get_child(0);
 
 func set_steady(new_steady):
@@ -116,6 +117,7 @@ func move_to(target_position):
 
 
 func bump(cell_start, cell_target, times):
+	actor_sound_effect_player.play_drill_sound_effect()
 	set_process(false)
 	for i in times:
 		$AnimationPlayer.play("bump")
